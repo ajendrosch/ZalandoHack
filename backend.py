@@ -12,7 +12,9 @@ CORS(app)
 @app.route("/upload", methods=['POST'])
 def upload():
     img  = request.form['img']
-    return img
+    data = {}
+    data["result"] = "test"
+    return json.dumps(data)
 
 if __name__ == "__main__":
     app.run(port=80)
