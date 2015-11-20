@@ -172,7 +172,7 @@
                     <img id="pic_1" class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
                 <h3>
-                    <a href="#">Project Name</a>
+                    <a id="ref_1" href="#">Project Name</a>
                 </h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
@@ -181,7 +181,7 @@
                     <img id="pic_2" class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
                 <h3>
-                    <a href="#">Project Name</a>
+                    <a id="ref_2" href="#">Project Name</a>
                 </h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
@@ -190,7 +190,7 @@
                     <img id="pic_3" class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
                 <h3>
-                    <a href="#">Project Name</a>
+                    <a id="ref_3" href="#">Project Name</a>
                 </h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
@@ -313,9 +313,10 @@
             for (var i = items.length - 1; i >= 0; i--) {
                 var url = items[0]['url'];
                 var pic = items[0]['pic'];
-                var el = $('#pic_'.concat(i.toString()))
-                el.attr('src', url);
-                el.parentNode.attr('href', pic);
+                var el = $('#pic_'.concat(i.toString()));
+                el.attr('src', pic);
+                var ref = document.getElementById('#ref_'.concat(i.toString()));
+                ref.attr('href', url);
             };
         };
 
