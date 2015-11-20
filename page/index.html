@@ -92,7 +92,7 @@
 
 
                     <!-- UPLOAD BUTTON -->
-                    <img id="theoneuploadimg" class="center featurette-image img-circle img-responsive pull-right" src="img/oma.jpg">
+                    <img id="theoneuploadimg" class="center featurette-image img-circle img-responsive pull-right" src="img/oma.jpg" style="width:600;height:500;">
                     <!-- <form action="http://localhost/upload" method="post" enctype="multipart/form-data" id="form" name="upform"> </form>-->
                     <!-- TEST IMAGE -->
                     <h1 class="page-header">
@@ -110,13 +110,13 @@
                         <small>just like</small>
                     </h1>
 
-                    <img id="celebresult" class="center featurette-image img-circle img-responsive pull-right" src="img/oma.jpg">
+                    <img id="celebresult" class="center featurette-image img-circle img-responsive pull-right" src="img/oma.jpg" style="width:600;height:500;">
                     <h1 class="page-header">
-                        <small id="celebclass">David Beckham</small>
+                        <small id="celebclass">Crazy Grandma</small>
                     </h1>
                     <div class="progress">
-                        <div íd="celebpercent" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                            <span class="sr-only">70% Complete</span>
+                        <div id="celebpercent" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                            Similarity
                         </div>
                     </div>
                 </div>
@@ -168,31 +168,25 @@
         <!-- Projects Row -->
         <div class="row">
             <div class="col-md-4 portfolio-item">
-                <a href="#">
+                <a href="" id="ref_1">
                     <img id="pic_1" class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
-                <h3>
-                    <a id="ref_1" href="#">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
             <div class="col-md-4 portfolio-item">
-                <a href="#">
+                <a href="" id="ref_2">
                     <img id="pic_2" class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
-                <h3>
-                    <a id="ref_2" href="#">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
             <div class="col-md-4 portfolio-item">
-                <a href="#">
+                <a href="" id="ref_3">
                     <img id="pic_3" class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
+                <!--
                 <h3>
                     <a id="ref_3" href="#">Project Name</a>
                 </h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            -->
             </div>
         </div>
         <!-- /.row -->
@@ -302,9 +296,13 @@
         function visualize(resp){
             console.log("visualize");
             //show your similar celeb
-            $('#celebresult').attr('src', resp['pic']);
+            $('#celebresult').attr('src', resp['pic']).width(600).height(500);
             $('#celebclass').text(resp['class']);
-            $('#celebpercent').attr('aria-valuenow', resp['percent']);
+
+            console.log("class", resp['class']);
+            console.log("percent", resp['percent']);
+
+            $('#celebpercent').width(resp['percent']);
             
 
             var items = resp['items'];
@@ -315,7 +313,8 @@
                 var pic = items[i-1]['pic'];
                 var el = $('#pic_'.concat(i.toString()));
                 el.attr('src', pic);
-                //var ref = document.getElementById('#ref_'.concat(i.toString()));
+                var reference = $('#ref_'.concat(i.toString()));
+                reference.attr('href',url);
                 //ref.attr('href', url);
             };
         };
