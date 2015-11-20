@@ -119,7 +119,7 @@ def upload():
     fh.close()
     a=classifier.predict(["imageToSave.png"], input_type='files')
     best_label=a[0]['label']
-    [img1,img2,img3,url1,url2,url3] = someFunc(best_label)
+    [url1,url2,url3,img1,img2,img3] = someFunc(best_label)
     data = {}
     data["class"] = best_label
     data["items"] = [{"pic":img1,"url":url1},{"pic":img2,"url":url2},{"pic":img3,"url":url3}]

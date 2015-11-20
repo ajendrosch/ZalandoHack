@@ -310,13 +310,13 @@
             var items = resp['items'];
 
             //show items the celeb might like
-            for (var i = items.length - 1; i >= 0; i--) {
-                var url = items[0]['url'];
-                var pic = items[0]['pic'];
+            for (var i = items.length; i > 0; i--) {
+                var url = items[i-1]['url'];
+                var pic = items[i-1]['pic'];
                 var el = $('#pic_'.concat(i.toString()));
                 el.attr('src', pic);
-                var ref = document.getElementById('#ref_'.concat(i.toString()));
-                ref.attr('href', url);
+                //var ref = document.getElementById('#ref_'.concat(i.toString()));
+                //ref.attr('href', url);
             };
         };
 
