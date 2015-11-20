@@ -76,7 +76,7 @@
                 <label class="control-label">Select File</label>
                 <input id="input-1" type="file" class="page-scroll btn btn-xl">
             -->
-                <a href="#services" class="page-scroll btn btn-xl">check it out</a>
+                <a href="#services" class="page-scroll btn btn-xl" onclick="">check it out</a>
             </div>
         </div>
     </header>
@@ -93,7 +93,7 @@
 
 
             <!-- upload -->
-            <form action="/upload-target" class="dropzone"></form>
+            <form action="http://localhost/upload" class="dropzone" id="dropzonefiles"></form>
 
             <!-- UPLOAD BUTTON -->
             <form action="http://localhost/upload" method="post" enctype="multipart/form-data" id="form" name="upform">
@@ -103,7 +103,9 @@
             
 
             <!-- TEST IMAGE -->
+            <div id="imgTest"></div>
             <img id="theoneuploadimg" class="featurette-image img-circle img-responsive pull-right" src="img/oma.jpg">
+            <button onclick="encodeImageFileAsURL()">convert</button>
 
             <!-- CANVAS -->
 
@@ -181,6 +183,51 @@
 
     <!-- Start jQuery code -->
     <script type="text/javascript">
+
+        function encodeImageFileAsURL(){
+            console.log("function encodeImageFileAsURL")
+            // dropzonefiles
+            var filesSelected = document.getElementById("uploadimage").files;
+            console.log("number of files", filesSelected)
+            if (filesSelected.length > 0)
+            {
+                //alert("dropzone");
+                var fileToLoad = filesSelected[0];
+
+                var fileReader = new FileReader();
+
+                fileReader.onload = function(fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+                    var newImage = document.createElement('img');
+                    newImage.src = srcData;
+
+                    document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                    //alert("Converted Base64 version is "+document.getElementById("imgTest").innerHTML);
+                    console.log("Converted Base64 version is "+document.getElementById("imgTest").innerHTML);
+
+                    //upload2
+                    post_data = {
+                        'img'     : "Hallo Welt"
+                    };
+
+                    //Ajax post data to server
+                    //TODO URL
+                    $.post('http://localhost/upload', post_data, function(response){
+                        //alert("???")
+                        if(response.type == 'error'){ //load json data from server and output message     
+                            console.log("error:");
+                        }else{
+                            console.log("success:");
+                            //TODO reset values
+                        }
+                        //$("#contact_form #contact_results").hide().html(output).slideDown();
+                    }, 'json');
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        };
+
     $(document).ready(function() {
         alert("ready");
 
@@ -222,40 +269,7 @@
                 }, 'json');
             }
         });
-
-        /*
-        function test() {
-            alert("test");
-            var ctx = document.getElementById('canvas');
-            if (canvas.getContext) {
-
-                var ctx = canvas.getContext('2d');
-
-                //Loading of the home test image - img1
-                var img1 = new Image();
-                img1.src = 'img/oma.jpg';
-                //img = document.getElementById("theoneuploadimg");
-
-                //drawing of the test image - img1
-                img1.onload = function () {
-                    //draw background image
-                    ctx.drawimage(img1, 0, 0);
-                    //draw a box over the top
-                    ctx.fillStyle = "rgba(200, 0, 0, 0.5)";
-                    ctx.fillRect(0, 0, 500, 500);
-
-                };
-                alert("bild");
-            }
-        };
-        */
         
-        //reset previously set border colors and hide all message on .keyup()
-        /*$("#contact_form  input[required=true], #contact_form textarea[required=true]").keyup(function() { 
-            $(this).css('border-color',''); 
-            $("#result").slideUp();
-        });
-        */
     })
     </script>
 
