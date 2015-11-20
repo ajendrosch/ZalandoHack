@@ -52,9 +52,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <!--
                     <li>
                         <a class="page-scroll" href="#about">About</a>
                     </li>
+                -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -82,21 +84,43 @@
     <section id="services">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-6 text-center">
 
-                    <h2 class="section-heading">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h1 class="page-header">Bro,
+                        <small>Hands on</small>
+                    </h1>
 
 
                     <!-- UPLOAD BUTTON -->
                     <img id="theoneuploadimg" class="center featurette-image img-circle img-responsive pull-right" src="img/oma.jpg">
-                    <form action="http://localhost/upload" method="post" enctype="multipart/form-data" id="form" name="upform">
-                        <!-- TEST IMAGE -->
-                        <input class="page-scroll btn btn-xl" type="file" id="uploadimage" onchange="encodeImageFileAsURL()">
-                    </form>
+                    <!-- <form action="http://localhost/upload" method="post" enctype="multipart/form-data" id="form" name="upform"> </form>-->
+                    <!-- TEST IMAGE -->
+                    <h1 class="page-header">
+                        <small>You</small>
+                    </h1>
+                    <input class="page-scroll btn btn-xl" type="file" id="uploadimage" onchange="encodeImageFileAsURL()" style="display:none;">
+                    <button text="Upload" class="page-scroll btn btn-xl" onclick="document.getElementById('uploadimage').click();">Upload</button>
+                    
                     <!--<button class="page-scroll btn btn-xl" onclick="encodeImageFileAsURL()">convert</button>-->
-
                 </div>
+
+
+                <div class="col-lg-6 text-center">
+                    <h1 class="page-header">You look amazing
+                        <small>just like</small>
+                    </h1>
+
+                    <img id="celebresult" class="center featurette-image img-circle img-responsive pull-right" src="img/oma.jpg">
+                    <h1 class="page-header">
+                        <small id="celebclass">David Beckham</small>
+                    </h1>
+                    <div class="progress">
+                        <div íd="celebpercent" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                            <span class="sr-only">70% Complete</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -104,25 +128,81 @@
 
 
     <!-- Celebs Visual Section -->
+    <!--
     <section id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h1 class="page-header">You look amazing
+                        <small>just like</small>
+                    </h1>
+
+                    <img id="celebresult" class="center featurette-image img-circle img-responsive pull-right" src="img/oma.jpg">
+                    <small id="celebclass">David Beckham</small>
+                    <div class="progress">
+                        <div íd="celebpercent" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                            <span class="sr-only">70% Complete</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+-->
 
 
+    <!-- Products -->
+    <!-- Page Content -->
+    <div class="container">
 
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Hey model,
+                    <small>the style you need.</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+            <div class="col-md-4 portfolio-item">
+                <a href="#">
+                    <img id="pic_1" class="img-responsive" src="http://placehold.it/700x400" alt="">
+                </a>
+                <h3>
+                    <a href="#">Project Name</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+            <div class="col-md-4 portfolio-item">
+                <a href="#">
+                    <img id="pic_2" class="img-responsive" src="http://placehold.it/700x400" alt="">
+                </a>
+                <h3>
+                    <a href="#">Project Name</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+            <div class="col-md-4 portfolio-item">
+                <a href="#">
+                    <img id="pic_3" class="img-responsive" src="http://placehold.it/700x400" alt="">
+                </a>
+                <h3>
+                    <a href="#">Project Name</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
 
 
 
 
     <!-- Footer -->
-    <!--
     <footer>
         <div class="container">
             <div class="row">
@@ -150,7 +230,6 @@
             </div>
         </div>
     </footer>
--->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -206,16 +285,38 @@
                     $.post('http://localhost/upload', post_data, function(response){
                         //alert("???")
                         if(response.type == 'error'){ //load json data from server and output message     
-                            console.log("error:");
+                            console.log("error:", response);
                         }else{
-                            console.log("success:");
+                            console.log("success:", response);
                             //TODO reset values
+
+                            visualize(response['response']);
                         }
                         //$("#contact_form #contact_results").hide().html(output).slideDown();
                     }, 'json');
                 }
                 fileReader.readAsDataURL(fileToLoad);
             }
+        };
+
+        function visualize(resp){
+            console.log("visualize");
+            //show your similar celeb
+            $('#celebresult').attr('src', resp['pic']);
+            $('#celebclass').text(resp['class']);
+            $('#celebpercent').attr('aria-valuenow', resp['percent']);
+            
+
+            var items = resp['items'];
+
+            //show items the celeb might like
+            for (var i = items.length - 1; i >= 0; i--) {
+                var url = items[0]['url'];
+                var pic = items[0]['pic'];
+                var el = $(concat('#pic_',i.toString()))
+                el.attr('src', url);
+                el.outerHTML.attr('href', pic);
+            };
         };
 
 
