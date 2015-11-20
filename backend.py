@@ -11,9 +11,8 @@ CORS(app)
 
 @app.route("/upload", methods=['POST'])
 def upload():
-    file = request.files['img']
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-    return os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    img  = request.form['img']
+    return img
 
 if __name__ == "__main__":
     app.run(port=80)
