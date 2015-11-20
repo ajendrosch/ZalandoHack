@@ -96,7 +96,11 @@
             <form action="/upload-target" class="dropzone"></form>
 
             <!-- UPLOAD BUTTON -->
-            <button type="button" id="submit_btn" class="btn btn-success">Upload</button>
+            <form action="http://localhost/upload" method="post" enctype="multipart/form-data" id="form" name="upform">
+                <input type="file" id="uploadimage">
+                <button type="submit" class="btn btn-success" onclick="upload2(upform)">Upload</button>
+            </form>
+            
 
             <!-- TEST IMAGE -->
             <img id="theoneuploadimg" class="featurette-image img-circle img-responsive pull-right" src="img/oma.jpg">
@@ -170,7 +174,7 @@
 
     <!-- Contact Form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
+    <!--<script src="js/contact_me.js"></script> -->
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency.js"></script>
@@ -179,6 +183,13 @@
     <script type="text/javascript">
     $(document).ready(function() {
         alert("ready");
+
+        function upload2(form)
+        {
+          var request = new XMLHttpRequest();
+          alert("Action="+form.action);
+          request.open("POST", form.action);
+        };
 
         $("#submit_btn").click(function() {
         //function upload(function() {
@@ -198,7 +209,7 @@
 
                 //Ajax post data to server
                 //TODO URL
-                $.post('http://ec2-52-29-102-184.eu-central-1.compute.amazonaws.com/upload.py', post_data, function(response){
+                $.post('http://ec2-52-29-102-184.eu-central-1.compute.amazonaws.com/', post_data, function(response){
                     //alert("???")
                     if(response.type == 'error'){ //load json data from server and output message     
                         output = '<hr class="grey"><h4>ERROR: '+response.text+'</h4>';
