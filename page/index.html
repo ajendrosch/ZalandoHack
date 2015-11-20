@@ -203,12 +203,13 @@
                     newImage.src = srcData;
 
                     document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                    var baseimage = document.getElementById("imgTest").innerHTML;
                     //alert("Converted Base64 version is "+document.getElementById("imgTest").innerHTML);
-                    console.log("Converted Base64 version is "+document.getElementById("imgTest").innerHTML);
+                    console.log("Converted Base64 version is "+baseimage);
 
                     //upload2
                     post_data = {
-                        'img'     : "Hallo Welt"
+                        'img'     : baseimage
                     };
 
                     //Ajax post data to server
